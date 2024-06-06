@@ -1,19 +1,12 @@
-import gspread
-from google.oauth2.service_account import Credentials
+from data_manager import DataManager
 
-SCOPE = [
-    "https://www.googleapis.com/auth/spreadsheets",
-    "https://www.googleapis.com/auth/drive.file",
-    "https://www.googleapis.com/auth/drive"
-    ]
+# Initialize the data manager
+creds_file = 'creds.json'
+spreadsheet_name = 'crm_data'
+worksheet_name = 'contacts'
 
-CREDS = Credentials.from_service_account_file('creds.json')
-SCOPED_CREDS = CREDS.with_scopes(SCOPE)
-GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
-SHEET = GSPREAD_CLIENT.open('crm_data')
+data_manager = DataManager(creds_file, spreadsheet_name, worksheet_name)
 
-sales = SHEET.worksheet('contacts')
-
-data = sales.get_all_values()
-
+# Get all data and print it
+data = data_manager.get_all_data()
 print(data)
