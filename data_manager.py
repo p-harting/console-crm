@@ -42,3 +42,16 @@ class DataManager:
         next_id = last_id + 1
         new_row = [next_id] + values
         self.worksheet.append_row(new_row)
+
+    def delete_row(self, row_index):
+        self.worksheet.delete_rows(row_index)
+
+    def delete_row_by_id(self, id):
+        id_col = self.worksheet.col_values(1)
+        try:
+            row_index = id_col.index(str(id)) + 1
+            self.delete_row(row_index)
+            return True
+        except ValueError:
+            return False
+
