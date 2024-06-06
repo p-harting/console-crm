@@ -15,6 +15,10 @@ print(data)
 row_data = data_manager.get_row(2)
 print(row_data)
 
-#Get row by id
+# Get row by id
 row_data = data_manager.get_row_by_id(1)
 print(row_data)
+
+# Append data to end
+append_data = ['John', 'Smith', '1985-02-14', 'john.smith@example.com', '555-123-4567', 'Acme Corp', 'Sales Manager', 'Lead']
+data_manager.append_row(append_data)

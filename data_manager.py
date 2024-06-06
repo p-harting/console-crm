@@ -28,3 +28,17 @@ class DataManager:
             return self.get_row(row_index)
         except ValueError:
             return None
+
+    def append_row(self, values):
+        id_col = self.worksheet.col_values(1)
+        if id_col:
+            try:
+                last_id = int(id_col[-1])
+            except ValueError:
+                last_id = int(id_col[-2]) if len(id_col) > 1 else 0
+        else:
+            last_id = 0
+        
+        next_id = last_id + 1
+        new_row = [next_id] + values
+        self.worksheet.append_row(new_row)
