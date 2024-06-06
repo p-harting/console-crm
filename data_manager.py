@@ -17,3 +17,14 @@ class DataManager:
     
     def get_all_data(self):
         return self.worksheet.get_all_values()
+    
+    def get_row(self, row_index):
+        return self.worksheet.row_values(row_index)
+    
+    def get_row_by_id(self, id):
+        id_col = self.worksheet.col_values(1)
+        try:
+            row_index = id_col.index(str(id)) + 1
+            return self.get_row(row_index)
+        except ValueError:
+            return None
