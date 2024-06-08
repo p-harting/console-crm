@@ -108,8 +108,14 @@ class CRM:
         lastname = input("> ").strip()
         print("Birthday:")
         dob = input("> ").strip()
+
+        # Test email validator
         print("Email:")
         email = input("> ").strip()
+        while Validator.validate_email(email) == False:
+            print("Email:")
+            email = input("> ").strip()
+            
         print("Phone:")
         phone = input("> ").strip()
         print("Company:")
