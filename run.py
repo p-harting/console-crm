@@ -3,6 +3,7 @@ from rich.console import Console
 from rich.table import Table
 
 from data_manager import DataManager
+from validator import Validator
 
 # Initialize rich console
 console = Console()
