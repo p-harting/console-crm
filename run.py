@@ -47,31 +47,34 @@ class CRM:
         table.add_column("Option", justify="left", style="green", no_wrap=True)
         table.add_column("Description", style="green")
 
-        table.add_row("1", "See all contacts")
-        table.add_row("2", "Search contact")
-        table.add_row("3", "Edit contact")
-        table.add_row("4", "Add new contact")
-        table.add_row("5", "Delete contact")
+        table.add_row("1", "See all customers")
+        table.add_row("2", "Search customer")
+        table.add_row("3", "Edit customer")
+        table.add_row("4", "Add new customer")
+        table.add_row("5", "Delete customer")
+        table.add_row("6", "Exit")
 
         print(table)
         choice = input("> ").strip()
             
         if choice == '1':
-            self.show_all_contacts()
+            self.show_all_customers()
+        elif choice == '4':
+            self.add_new_customer()
         elif choice == '6':
             print("Exiting the program. Goodbye!")
             return
         else:
             print("[bold red]Invalid choice, please select a valid option.[/bold red]")
     
-    def show_all_contacts(self):
+    def show_all_customers(self):
         """
-        Display all contacts
+        Display all customers
         """
         console.clear()
-        contacts = data_manager.get_all_data()
-        if contacts:
-            table = Table(title="All Contacts")
+        customers = data_manager.get_all_data()
+        if customers:
+            table = Table(title="All Customers")
             table.add_column("Firstname", justify="left", style="green")
             table.add_column("Lastname", style="green")
             table.add_column("Birthday", style="green")
@@ -81,14 +84,42 @@ class CRM:
             table.add_column("Position", style="green")
             table.add_column("Relation", style="green")
 
-            for contact in contacts[1:]:
+            for contact in customers[1:]:
                 table.add_row(contact[1], contact[2], contact[3], contact[4], contact[5], contact[6], contact[7], contact[8], )
 
             console.print(table)
         else:
-            print("[bold red]No contacts found.[/bold red]")
+            print("[bold red]No customers found.[/bold red]")
 
         input("Press Enter to return to the main menu...")
+        self.main_menu()
+
+    def add_new_customer(self):
+        """
+        Add a new customer
+        """
+        console.clear()
+        print("Input the data about the new customer. (If you don't have the information, you can just leave the field empty)")
+
+        print("Firstname:")
+        firstname = input("> ").strip()
+        print("Lastname:")
+        lastname = input("> ").strip()
+        print("Birthday:")
+        dob = input("> ").strip()
+        print("Email:")
+        email = input("> ").strip()
+        print("Phone:")
+        phone = input("> ").strip()
+        print("Company:")
+        company = input("> ").strip()
+        print("Position:")
+        position = input("> ").strip()
+        print("Relation:")
+        relation = input("> ").strip()
+
+        data_manager.append_row([firstname, lastname, dob, email, phone, company, position, relation])
+
         self.main_menu()
 
 def main():
