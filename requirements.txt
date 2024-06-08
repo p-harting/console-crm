@@ -11,3 +11,4 @@ regex==2024.5.15
 requests-oauthlib==2.0.0
 rsa==4.9
 zope.interface==6.4.post2
+rich==13.7.1
