@@ -63,7 +63,6 @@ class DataManager:
         search_results = []
 
         for row in all_data:
-            # Check if any column contains the query
             if any(query.lower() in column.lower() for column in row):
                 search_results.append(row)
 

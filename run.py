@@ -244,7 +244,8 @@ Required fields are mark with a asterisk(*).'''
 
         if search_results:
             table = Table(title="Search Results")
-            table.add_column("Firstname", justify="left", style="green")
+            table.add_column("ID", justify="left", style="green")
+            table.add_column("Firstname", style="green")
             table.add_column("Lastname", style="green")
             table.add_column("Birthday", style="green")
             table.add_column("Email", style="green")
@@ -254,7 +255,7 @@ Required fields are mark with a asterisk(*).'''
             table.add_column("Relation", style="green")
 
             for contact in search_results:
-                table.add_row(contact[1], contact[2], contact[3], contact[4], contact[5], contact[6], contact[7], contact[8])
+                table.add_row(contact[0], contact[1], contact[2], contact[3], contact[4], contact[5], contact[6], contact[7], contact[8])
 
             console.print(table)
         else:
