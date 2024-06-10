@@ -13,7 +13,7 @@ class Validator:
         return bool(value)
     @staticmethod
     def max_length(value):
-        return len(value) <= 24
+        return len(value) <= 128
     @staticmethod
     def validate_dob(value):
         return bool(re.match(r'^\d{4}/\d{2}/\d{2}$', value))
