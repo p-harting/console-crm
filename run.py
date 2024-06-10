@@ -132,6 +132,9 @@ Required fields are mark with a asterisk(*).''')
 
         print("Phone:")
         phone = input("> ").strip()
+        while Validator.validate_phone(phone)  == False:
+            print("Please enter a valide phonenumber. (Format: 123-456-7890)")
+            phone = input("> ").strip()
 
         print("Company:")
         company = input("> ").strip()

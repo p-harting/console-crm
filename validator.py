@@ -17,4 +17,7 @@ class Validator:
     @staticmethod
     def validate_dob(value):
         return bool(re.match(r'^\d{4}/\d{2}/\d{2}$', value))
+    @staticmethod
+    def validate_phone(value):
+        return bool(re.match(r'^\d{3}-\d{3}-\d{4}$', value))
     
