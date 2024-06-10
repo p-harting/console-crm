@@ -71,6 +71,8 @@ class CRM:
             self.search_customer()
         elif choice == '4':
             self.add_new_customer()
+        elif choice == '5':
+            self.delete_customer()
         elif choice == '6':
             print("Exiting the program. Goodbye!")
             return
@@ -258,6 +260,48 @@ Required fields are mark with a asterisk(*).'''
                 table.add_row(contact[0], contact[1], contact[2], contact[3], contact[4], contact[5], contact[6], contact[7], contact[8])
 
             console.print(table)
+        else:
+            print("No matching customers found.")
+
+        input("Press Enter to return to the main menu...")
+        self.main_menu()
+    
+    def delete_customer(self):
+        console.clear()
+        search_query = input("Enter search query: ").strip()
+        search_results = data_manager.search_customer(search_query)
+
+        if search_results:
+            table = Table(title="Search Results")
+            table.add_column("ID", justify="left", style="green")
+            table.add_column("Firstname", style="green")
+            table.add_column("Lastname", style="green")
+            table.add_column("Birthday", style="green")
+            table.add_column("Email", style="green")
+            table.add_column("Phone", style="green")
+            table.add_column("Company", style="green")
+            table.add_column("Position", style="green")
+            table.add_column("Relation", style="green")
+
+            for contact in search_results:
+                table.add_row(contact[0], contact[1], contact[2], contact[3], contact[4], contact[5], contact[6], contact[7], contact[8])
+
+            console.print(table)
+            
+            print("Enter the ID to delete:")
+            deleted_customer_id = input("> ")
+
+            if deleted_customer_id in [result[0] for result in search_results]:
+                confirmation = input("Are you sure you want to delete this customer? (yes/no): ").strip().lower()
+                if confirmation == "yes":
+                    data_manager.delete_row_by_id(deleted_customer_id)
+                    console.print("Customer deleted successfully!", style=success_sytle)
+                elif confirmation == "no":
+                    console.print("Customer deletion cancelled.", style=error_style)
+                else:
+                    console.print("Invalid input. Customer deletion cancelled.", style=error_style)
+            else:
+                console.print("Invalid ID. Customer deletion cancelled.", style=error_style)
         else:
             print("No matching customers found.")
 
