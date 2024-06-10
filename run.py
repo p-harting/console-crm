@@ -116,6 +116,9 @@ Required fields are mark with a asterisk(*).''')
 
         print("Birthday:")
         dob = input("> ").strip()
+        while Validator.validate_dob(dob) == False:
+            print("Please enter a valide date. (Format: YEAR/MONTH/DAY)")
+            dob = input("> ").strip()
 
         # Get and validate email
         print("Email:")
