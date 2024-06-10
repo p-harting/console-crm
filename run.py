@@ -103,9 +103,13 @@ class CRM:
         print('''Input the data about the new customer.
 If you don't have the information, you can just use a backslash(/).
 Required fields are mark with a asterisk(*).''')
-
+        
+        # Get and validate firstname
         print("Firstname*:")
         firstname = input("> ").strip()
+        while Validator.not_empty(firstname) == False:
+            print("Firstname can't be empty!")
+            firstname = input("> ").strip()
 
         print("Lastname:")
         lastname = input("> ").strip()
@@ -113,7 +117,7 @@ Required fields are mark with a asterisk(*).''')
         print("Birthday:")
         dob = input("> ").strip()
 
-        # Test email validator
+        # Get and validate email
         print("Email:")
         email = input("> ").strip()
         while Validator.validate_email(email) == False and Validator.backslash(email) == False:

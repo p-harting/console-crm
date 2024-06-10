@@ -8,3 +8,6 @@ class Validator:
     @staticmethod
     def backslash(value):
         return bool(value == "/")
+    @staticmethod
+    def not_empty(value):
+        return bool(value)
