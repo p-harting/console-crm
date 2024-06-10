@@ -1,4 +1,7 @@
+import time
+
 from rich import print
+from rich.style import Style
 from rich.console import Console
 from rich.table import Table
 
@@ -12,6 +15,10 @@ console = Console()
 creds_file = 'creds.json'
 spreadsheet_name = 'crm_data'
 worksheet_name = 'contacts'
+
+# Define styles
+error_style = Style(color="red", blink=True, bold=True)
+success_sytle = Style(color="green", blink=True, bold=True)
 
 # Initialize the data manager
 with console.status("[bold green]Connecting to Database...") as status:
@@ -100,52 +107,131 @@ class CRM:
         Add a new customer
         """
         console.clear()
-        print('''Input the data about the new customer.
+        new_customer_description = '''Input the data about the new customer.
 If you don't have the information, you can just use a backslash(/).
-Required fields are mark with a asterisk(*).''')
+Required fields are mark with a asterisk(*).'''
+        print(new_customer_description)
         
         # Get and validate firstname
-        print("Firstname*:")
+        console.print("Firstname*:")
         firstname = input("> ").strip()
-        while Validator.not_empty(firstname) == False or Validator.max_length(firstname) == False:
-            print("Firstname needs to be between 1 and 24 characters!")
+        while Validator.backslash(firstname) == True or Validator.not_empty(firstname) == False or Validator.max_length(firstname) == False:
+            console.clear()
+            console.print(new_customer_description)
+            console.print("Firstname needs to be between 1 and 24 characters!", style=error_style)
+            console.print("Firstname*:")
             firstname = input("> ").strip()
 
-        print("Lastname:")
-        lastname = input("> ").strip()
+        console.clear()
+        console.print(new_customer_description)
 
-        print("Birthday:")
+        # Get and validate lastname
+        console.print("Lastname:")
+        lastname = input("> ").strip()
+        while Validator.not_empty(lastname) == False or Validator.max_length(lastname) == False:
+            console.clear()
+            console.print(new_customer_description)
+            console.print("Lastname needs to be between 1 and 24 characters!", style=error_style)
+            console.print("Lastname:")
+            lastname = input("> ").strip()
+        if Validator.backslash(lastname) == True:
+            lastname = ""
+        
+        console.clear()
+        console.print(new_customer_description)
+
+        # Get and validate dob
+        console.print("Birthday:")
         dob = input("> ").strip()
-        while Validator.validate_dob(dob) == False:
-            print("Please enter a valide date. (Format: YEAR/MONTH/DAY)")
+        while Validator.validate_dob(dob) == False and Validator.backslash(dob) == False:
+            console.clear()
+            console.print(new_customer_description)
+            console.print("Please enter a valide date. (Format: YEAR/MONTH/DAY)", style=error_style)
+            console.print("Birthday:")
             dob = input("> ").strip()
+        if Validator.backslash(dob) == True:
+            dob = ""
+
+        console.clear()
+        console.print(new_customer_description)
 
         # Get and validate email
-        print("Email:")
+        console.print("Email:")
         email = input("> ").strip()
-        while Validator.validate_email(email) == False and Validator.backslash(email) == False:
-            print("Not a valid Email, please try again!")
-            print("Email:")
+        while Validator.backslash(email) == False and (Validator.validate_email(email) == False or Validator.max_length(email) == False):
+            console.clear()
+            console.print(new_customer_description)
+            console.print("Not a valid Email, please try again!", style=error_style)
+            console.print("Email:")
             email = input("> ").strip()
         if Validator.backslash(email) == True:
             email = ""
+        
+        console.clear()
+        console.print(new_customer_description)
 
-        print("Phone:")
+        # Get and validate phone
+        console.print("Phone:")
         phone = input("> ").strip()
-        while Validator.validate_phone(phone)  == False:
-            print("Please enter a valide phonenumber. (Format: 123-456-7890)")
+        while Validator.validate_phone(phone) == False and Validator.backslash(phone) == False:
+            console.clear()
+            console.print(new_customer_description)
+            console.print("Please enter a valide phonenumber. (Format: 123-456-7890)", style=error_style)
+            console.print("Phone:")
             phone = input("> ").strip()
+        if Validator.backslash(phone) == True:
+            phone = ""
 
-        print("Company:")
+        console.clear()
+        console.print(new_customer_description)
+
+        # Get and validate company
+        console.print("Company:")
         company = input("> ").strip()
+        while Validator.not_empty(company) == False or Validator.max_length(company) == False:
+            console.clear()
+            console.print(new_customer_description)
+            console.print("Company needs to be between 1 and 24 characters!", style=error_style)
+            console.print("Company:")
+            company = input("> ").strip()
+        if Validator.backslash(company) == True:
+            company = ""
 
+        console.clear()
+        console.print(new_customer_description)
+
+        # Get and validate position
         print("Position:")
         position = input("> ").strip()
+        while Validator.not_empty(position) == False or Validator.max_length(position) == False:
+            console.clear()
+            console.print(new_customer_description)
+            console.print("Position needs to be between 1 and 24 characters!", style=error_style)
+            console.print("Position:")
+            company = input("> ").strip()
+        if Validator.backslash(position) == True:
+            position = ""
 
-        print("Relation:")
+        console.clear()
+        console.print(new_customer_description)
+
+        # Get and validate relation
+        console.print("Relation:")
         relation = input("> ").strip()
+        while Validator.not_empty(relation) == False or Validator.max_length(relation) == False:
+            console.clear()
+            console.print(new_customer_description)
+            console.print("Relation needs to be between 1 and 24 characters!", style=error_style)
+            console.print("Relation:")
+            relation = input("> ").strip()
+        if Validator.backslash(relation) == True:
+            relation = ""
+
+        console.clear()
 
         data_manager.append_row([firstname, lastname, dob, email, phone, company, position, relation])
+        console.print("A new customer was successfully created!", style=success_sytle)
+        time.sleep(2)
 
         self.main_menu()
 
