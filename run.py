@@ -107,8 +107,8 @@ Required fields are mark with a asterisk(*).''')
         # Get and validate firstname
         print("Firstname*:")
         firstname = input("> ").strip()
-        while Validator.not_empty(firstname) == False:
-            print("Firstname can't be empty!")
+        while Validator.not_empty(firstname) == False or Validator.max_length(firstname) == False:
+            print("Firstname needs to be between 1 and 24 characters!")
             firstname = input("> ").strip()
 
         print("Lastname:")

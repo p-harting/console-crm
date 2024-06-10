@@ -11,3 +11,6 @@ class Validator:
     @staticmethod
     def not_empty(value):
         return bool(value)
+    @staticmethod
+    def max_length(value):
+        return len(value) <= 24
