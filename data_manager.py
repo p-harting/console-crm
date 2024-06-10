@@ -54,4 +54,18 @@ class DataManager:
             return True
         except ValueError:
             return False
+        
+    def search_customer(self, query):
+        """
+        Search for customers based on a query.
+        """
+        all_data = self.get_all_data()
+        search_results = []
+
+        for row in all_data:
+            # Check if any column contains the query
+            if any(query.lower() in column.lower() for column in row):
+                search_results.append(row)
+
+        return search_results
 

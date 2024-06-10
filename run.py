@@ -67,6 +67,8 @@ class CRM:
             
         if choice == '1':
             self.show_all_customers()
+        elif choice == '2':
+            self.search_customer()
         elif choice == '4':
             self.add_new_customer()
         elif choice == '6':
@@ -233,6 +235,32 @@ Required fields are mark with a asterisk(*).'''
         console.print("A new customer was successfully created!", style=success_sytle)
         time.sleep(2)
 
+        self.main_menu()
+    
+    def search_customer(self):
+        console.clear()
+        search_query = input("Enter search query: ").strip()
+        search_results = data_manager.search_customer(search_query)
+
+        if search_results:
+            table = Table(title="Search Results")
+            table.add_column("Firstname", justify="left", style="green")
+            table.add_column("Lastname", style="green")
+            table.add_column("Birthday", style="green")
+            table.add_column("Email", style="green")
+            table.add_column("Phone", style="green")
+            table.add_column("Company", style="green")
+            table.add_column("Position", style="green")
+            table.add_column("Relation", style="green")
+
+            for contact in search_results:
+                table.add_row(contact[1], contact[2], contact[3], contact[4], contact[5], contact[6], contact[7], contact[8])
+
+            console.print(table)
+        else:
+            print("No matching customers found.")
+
+        input("Press Enter to return to the main menu...")
         self.main_menu()
 
 def main():
