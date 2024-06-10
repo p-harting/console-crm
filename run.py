@@ -100,28 +100,38 @@ class CRM:
         Add a new customer
         """
         console.clear()
-        print("Input the data about the new customer. (If you don't have the information, you can just leave the field empty)")
+        print('''Input the data about the new customer.
+If you don't have the information, you can just use a backslash(/).
+Required fields are mark with a asterisk(*).''')
 
-        print("Firstname:")
+        print("Firstname*:")
         firstname = input("> ").strip()
+
         print("Lastname:")
         lastname = input("> ").strip()
+
         print("Birthday:")
         dob = input("> ").strip()
 
         # Test email validator
         print("Email:")
         email = input("> ").strip()
-        while Validator.validate_email(email) == False:
+        while Validator.validate_email(email) == False and Validator.backslash(email) == False:
+            print("Not a valid Email, please try again!")
             print("Email:")
             email = input("> ").strip()
-            
+        if Validator.backslash(email) == True:
+            email = ""
+
         print("Phone:")
         phone = input("> ").strip()
+
         print("Company:")
         company = input("> ").strip()
+
         print("Position:")
         position = input("> ").strip()
+
         print("Relation:")
         relation = input("> ").strip()
 
