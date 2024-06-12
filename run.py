@@ -7,6 +7,7 @@ from rich.table import Table
 
 from data_manager import DataManager
 from validator import Validator
+from mail_manager import MailManager
 
 # Initialize rich console
 console = Console()
