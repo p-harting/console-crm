@@ -81,9 +81,9 @@ class CRM:
         elif choice == '4':
             self.add_new_customer()
         elif choice == '5':
-            self.send_customer_email()
-        elif choice == '6':
             self.delete_customer()
+        elif choice == '6':
+            self.send_customer_email()
         elif choice == '7':
             print("Exiting the program. Goodbye!")
             return
@@ -320,12 +320,24 @@ Required fields are mark with a asterisk(*).'''
         self.main_menu()
 
     def send_customer_email(self):
+        console.clear()
         mailer = MailManager()
         receiver_mail = input("Email: ")
         subject = input("Subject: ")
-        message = input("Message: ")
+        message = self.get_multiline_input("Enter the email body. Write exit to finish:")
         mailer.send_mail(receiver_mail, subject, message, app_password)
         self.main_menu()
+    
+    def get_multiline_input(self, prompt):
+        print(prompt)
+        lines = []
+        while True:
+            line = input()
+            if line.strip().lower() == "exit":
+                break
+            lines.append(line)
+        return "\n".join(lines)
+
 
 def main():
     app = CRM()
