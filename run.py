@@ -338,7 +338,6 @@ Required fields are mark with a asterisk(*).'''
             lines.append(line)
         return "\n".join(lines)
 
-
 def main():
     app = CRM()
     app.run()

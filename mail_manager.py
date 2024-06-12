@@ -7,3 +7,4 @@ class MailManager:
         text = f"Subject: {subject}\n\n{message}"
         server.login("console.crm.sender@gmail.com", password)
         server.sendmail("console.crm.sender@gmail.com", receiver_mail, text)
+        server.quit()
