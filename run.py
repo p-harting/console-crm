@@ -1,4 +1,5 @@
 import time
+import json
 
 from rich import print
 from rich.style import Style
@@ -12,8 +13,12 @@ from mail_manager import MailManager
 # Initialize rich console
 console = Console()
 
-# Define database location
+# Define database 
 creds_file = 'creds.json'
+with open(creds_file, 'r') as f:
+    creds = json.load(f)
+
+google_sheets_creds = creds.get('google_sheets')
 spreadsheet_name = 'crm_data'
 worksheet_name = 'contacts'
 
@@ -23,7 +28,7 @@ success_sytle = Style(color="green", blink=True, bold=True)
 
 # Initialize the data manager
 with console.status("[bold green]Connecting to Database...") as status:
-    data_manager = DataManager(creds_file, spreadsheet_name, worksheet_name)
+    data_manager = DataManager(google_sheets_creds, spreadsheet_name, worksheet_name)
 
 ascii_logo = """
    _____                      _       _____ _____  __  __ 
@@ -61,6 +66,7 @@ class CRM:
         table.add_row("3", "Edit customer")
         table.add_row("4", "Add new customer")
         table.add_row("5", "Delete customer")
+        table.add_row("5", "Send an email")
         table.add_row("6", "Exit")
 
         print(table)
@@ -73,8 +79,10 @@ class CRM:
         elif choice == '4':
             self.add_new_customer()
         elif choice == '5':
-            self.delete_customer()
+            self.send_customer_email()
         elif choice == '6':
+            self.delete_customer()
+        elif choice == '7':
             print("Exiting the program. Goodbye!")
             return
         else:
@@ -308,6 +316,10 @@ Required fields are mark with a asterisk(*).'''
 
         input("Press Enter to return to the main menu...")
         self.main_menu()
+
+    def send_customer_email():
+        mailer = MailManager()
+        mailer.send_mail()
 
 def main():
     app = CRM()

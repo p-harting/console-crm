@@ -8,8 +8,8 @@ class DataManager:
         "https://www.googleapis.com/auth/drive"
     ]
 
-    def __init__(self, creds_file, spreadsheet_name, worksheet_name):
-        self.creds = Credentials.from_service_account_file(creds_file)
+    def __init__(self, google_sheets_creds, spreadsheet_name, worksheet_name):
+        self.creds = Credentials.from_service_account_info(google_sheets_creds)
         self.scoped_creds = self.creds.with_scopes(self.SCOPE)
         self.client = gspread.authorize(self.scoped_creds)
         self.sheet = self.client.open(spreadsheet_name)
