@@ -68,8 +68,8 @@ class CRM:
         table.add_row("3", "Edit customer")
         table.add_row("4", "Add new customer")
         table.add_row("5", "Delete customer")
-        table.add_row("5", "Send an email")
-        table.add_row("6", "Exit")
+        table.add_row("6", "Send an email")
+        table.add_row("7", "Exit")
 
         print(table)
         choice = input("> ").strip()
