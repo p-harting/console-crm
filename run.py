@@ -19,6 +19,8 @@ with open(creds_file, 'r') as f:
     creds = json.load(f)
 
 google_sheets_creds = creds.get('google_sheets')
+app_password = creds.get('app_password')
+
 spreadsheet_name = 'crm_data'
 worksheet_name = 'contacts'
 
@@ -317,9 +319,13 @@ Required fields are mark with a asterisk(*).'''
         input("Press Enter to return to the main menu...")
         self.main_menu()
 
-    def send_customer_email():
+    def send_customer_email(self):
         mailer = MailManager()
-        mailer.send_mail()
+        receiver_mail = input("Email: ")
+        subject = input("Subject: ")
+        message = input("Message: ")
+        mailer.send_mail(receiver_mail, subject, message, app_password)
+        self.main_menu()
 
 def main():
     app = CRM()
