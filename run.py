@@ -78,6 +78,8 @@ class CRM:
             self.show_all_customers()
         elif choice == '2':
             self.search_customer()
+        elif choice == '3':
+            self.edit_customer()
         elif choice == '4':
             self.add_new_customer()
         elif choice == '5':
@@ -108,7 +110,7 @@ class CRM:
             table.add_column("Relation", style="green")
 
             for contact in customers[1:]:
-                table.add_row(contact[1], contact[2], contact[3], contact[4], contact[5], contact[6], contact[7], contact[8], )
+                table.add_row(contact[1], contact[2], contact[3], contact[4], contact[5], contact[6], contact[7], contact[8])
 
             console.print(table)
         else:
@@ -116,6 +118,34 @@ class CRM:
 
         input("Press Enter to return to the main menu...")
         self.main_menu()
+    
+    def edit_customer(self):
+        """
+        Edit an existing customer.
+        """
+        console.clear()
+        search_query = input("Enter search query to find customer: ").strip()
+        search_results = data_manager.search_customer(search_query)
+
+        if search_results:
+            table = Table(title="Search Results")
+            table.add_column("ID", justify="left", style="green")
+            table.add_column("Firstname", style="green")
+            table.add_column("Lastname", style="green")
+            table.add_column("Birthday", style="green")
+            table.add_column("Email", style="green")
+            table.add_column("Phone", style="green")
+            table.add_column("Company", style="green")
+            table.add_column("Position", style="green")
+            table.add_column("Relation", style="green")
+
+            for contact in search_results[1:]:
+                table.add_row(contact[0], contact[1], contact[2], contact[3], contact[4], contact[5], contact[6], contact[7], contact[8])
+
+            console.print(table)
+
+            print("Enter the ID of the customer you want to edit:")
+            selected_customer_id = input("> ")
 
     def add_new_customer(self):
         """
@@ -267,7 +297,7 @@ Required fields are mark with a asterisk(*).'''
             table.add_column("Position", style="green")
             table.add_column("Relation", style="green")
 
-            for contact in search_results:
+            for contact in search_results[1:]:
                 table.add_row(contact[0], contact[1], contact[2], contact[3], contact[4], contact[5], contact[6], contact[7], contact[8])
 
             console.print(table)
