@@ -321,12 +321,54 @@ Required fields are mark with a asterisk(*).'''
 
     def send_customer_email(self):
         console.clear()
-        mailer = MailManager()
-        receiver_mail = input("Email: ")
-        subject = input("Subject: ")
-        message = self.get_multiline_input("Enter the email body. Write exit to finish:")
-        mailer.send_mail(receiver_mail, subject, message, app_password)
+        search_query = input("Enter search query to find customer: ").strip()
+        search_results = data_manager.search_customer(search_query)
+
+        if search_results:
+            table = Table(title="Search Results")
+            table.add_column("ID", justify="left", style="green")
+            table.add_column("Firstname", style="green")
+            table.add_column("Lastname", style="green")
+            table.add_column("Birthday", style="green")
+            table.add_column("Email", style="green")
+            table.add_column("Phone", style="green")
+            table.add_column("Company", style="green")
+            table.add_column("Position", style="green")
+            table.add_column("Relation", style="green")
+
+            for contact in search_results:
+                table.add_row(contact[0], contact[1], contact[2], contact[3], contact[4], contact[5], contact[6], contact[7], contact[8])
+
+            console.print(table)
+            
+            print("Enter the ID of the customer you want to email:")
+            selected_customer_id = input("> ")
+
+            selected_customer = next((result for result in search_results if result[0] == selected_customer_id), None)
+
+            if selected_customer:
+                if selected_customer[4]:
+                    receiver_mail = selected_customer[4]
+                else:
+                    console.print("No email found for this customer!", style=error_style)
+                    input("Press Enter to return to the main menu...")
+                    self.main_menu()
+                    time.sleep(2)
+                    self.main_menu()
+                    return
+                subject = input("Subject: ")
+                message = self.get_multiline_input("Enter the email body. Write exit to finish:")
+                mailer = MailManager()
+                mailer.send_mail(receiver_mail, subject, message, app_password)
+                console.print("Email sent successfully!", style=success_sytle)
+            else:
+                console.print("Invalid ID. Returning to the main menu.", style=error_style)
+        else:
+            console.print("No matching customers found.", style=error_style)
+
+        input("Press Enter to return to the main menu...")
         self.main_menu()
+
     
     def get_multiline_input(self, prompt):
         print(prompt)
