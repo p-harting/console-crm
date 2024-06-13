@@ -126,7 +126,7 @@ class CRM:
         console.clear()
         search_query = input("Enter search query to find customer: ").strip()
         search_results = data_manager.search_customer(search_query)
-
+        fields = ["ID", "Firstname", "Lastname", "Birthday", "Email", "Phone", "Company", "Position", "Relation"]
         if search_results:
             table = Table(title="Search Results")
             table.add_column("ID", justify="left", style="green")
@@ -146,8 +146,28 @@ class CRM:
 
             print("Enter the ID of the customer you want to edit:")
             selected_customer_id = input("> ")
-            new_values = ["test1", "test2", "test3", "test4", "test5", "test6", "test7", "test8", "test9"]
-            data_manager.update_row_by_id(selected_customer_id, new_values)
+            #new_values = ["test1", "test2", "test3", "test4", "test5", "test6", "test7", "test8", "test9"]
+            #data_manager.update_row_by_id(selected_customer_id, new_values)
+            print("Enter the name of the field you want to edit or 'save' to save changes:")
+            choice = input("> ").strip()
+
+            if choice.lower() == "save":
+                console.print("Customer updated successfully!", style=success_sytle)
+                time.sleep(2)
+                self.main_menu()
+                return
+            elif choice.lower() == "id":
+                console.print("Unable to edit ID!", style=error_style)
+                time.sleep(2)
+                self.edit_customer()
+                return
+        else:
+            console.print("No results found for the search query.", style=error_style)
+            time.sleep(2)
+            self.edit_customer()
+            return
+
+
 
     def add_new_customer(self):
         """
