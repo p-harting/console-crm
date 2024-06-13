@@ -146,6 +146,8 @@ class CRM:
 
             print("Enter the ID of the customer you want to edit:")
             selected_customer_id = input("> ")
+            new_values = ["test1", "test2", "test3", "test4", "test5", "test6", "test7", "test8", "test9"]
+            data_manager.update_row_by_id(selected_customer_id, new_values)
 
     def add_new_customer(self):
         """
