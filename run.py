@@ -126,7 +126,7 @@ class CRM:
         console.clear()
         search_query = input("Enter search query to find customer: ").strip()
         search_results = data_manager.search_customer(search_query)
-        fields = ["ID", "Firstname", "Lastname", "Birthday", "Email", "Phone", "Company", "Position", "Relation"]
+        fields = ["id", "firstname", "lastname", "birthday", "email", "phone", "company", "position", "relation"]
         if search_results:
             table = Table(title="Search Results")
             table.add_column("ID", justify="left", style="green")
@@ -146,6 +146,7 @@ class CRM:
 
             print("Enter the ID of the customer you want to edit:")
             selected_customer_id = input("> ")
+            customer_row = data_manager.get_row_by_id(selected_customer_id)
             #new_values = ["test1", "test2", "test3", "test4", "test5", "test6", "test7", "test8", "test9"]
             #data_manager.update_row_by_id(selected_customer_id, new_values)
             print("Enter the name of the field you want to edit or 'save' to save changes:")
@@ -161,12 +162,28 @@ class CRM:
                 time.sleep(2)
                 self.edit_customer()
                 return
+            elif choice in fields:
+                field_index = fields.index(choice)
+                new_value = input(f"Enter new value for {choice}: ")
+                updated_row = customer_row.copy()
+                updated_row[field_index] = new_value
+                if data_manager.update_row_by_id(selected_customer_id, updated_row):
+                    console.print("Field updated successfully!", style=success_sytle)
+                else:
+                    console.print("Failed to update the field!", style=error_style)
+
+                time.sleep(2)
+                self.main_menu()
+            else:
+                console.print("Invalid choice!", style=error_style)
+                time.sleep(2)
+                self.edit_customer()
+
         else:
             console.print("No results found for the search query.", style=error_style)
             time.sleep(2)
             self.edit_customer()
             return
-
 
 
     def add_new_customer(self):
@@ -202,7 +219,7 @@ Required fields are mark with a asterisk(*).'''
             console.print("Lastname:")
             lastname = input("> ").strip()
         if Validator.backslash(lastname) == True:
-            lastname = ""
+            lastname = "/"
         
         console.clear()
         console.print(new_customer_description)
@@ -217,7 +234,7 @@ Required fields are mark with a asterisk(*).'''
             console.print("Birthday:")
             dob = input("> ").strip()
         if Validator.backslash(dob) == True:
-            dob = ""
+            dob = "/"
 
         console.clear()
         console.print(new_customer_description)
@@ -232,7 +249,7 @@ Required fields are mark with a asterisk(*).'''
             console.print("Email:")
             email = input("> ").strip()
         if Validator.backslash(email) == True:
-            email = ""
+            email = "/"
         
         console.clear()
         console.print(new_customer_description)
@@ -247,7 +264,7 @@ Required fields are mark with a asterisk(*).'''
             console.print("Phone:")
             phone = input("> ").strip()
         if Validator.backslash(phone) == True:
-            phone = ""
+            phone = "/"
 
         console.clear()
         console.print(new_customer_description)
@@ -262,7 +279,7 @@ Required fields are mark with a asterisk(*).'''
             console.print("Company:")
             company = input("> ").strip()
         if Validator.backslash(company) == True:
-            company = ""
+            company = "/"
 
         console.clear()
         console.print(new_customer_description)
@@ -277,7 +294,7 @@ Required fields are mark with a asterisk(*).'''
             console.print("Position:")
             company = input("> ").strip()
         if Validator.backslash(position) == True:
-            position = ""
+            position = "/"
 
         console.clear()
         console.print(new_customer_description)
@@ -292,7 +309,7 @@ Required fields are mark with a asterisk(*).'''
             console.print("Relation:")
             relation = input("> ").strip()
         if Validator.backslash(relation) == True:
-            relation = ""
+            relation = "/"
 
         console.clear()
 
