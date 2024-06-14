@@ -125,69 +125,6 @@ class CRM:
         input("Press Enter to return to the main menu...")
         self.main_menu()
     
-    def edit_customer(self):
-        """
-        Edit an existing customer.
-        """
-        console.clear()
-        search_query = input("Enter search query to find customer: ").strip()
-        search_results = data_manager.search_customer(search_query)
-        fields = ["id", "firstname", "lastname", "birthday", "email", "phone", "company", "position", "relation"]
-        if search_results:
-            table = Table(title="Search Results")
-            table.add_column("ID", justify="left", style="green")
-            table.add_column("Firstname", style="green")
-            table.add_column("Lastname", style="green")
-            table.add_column("Birthday", style="green")
-            table.add_column("Email", style="green")
-            table.add_column("Phone", style="green")
-            table.add_column("Company", style="green")
-            table.add_column("Position", style="green")
-            table.add_column("Relation", style="green")
-
-            for contact in search_results[1:]:
-                table.add_row(contact[0], contact[1], contact[2], contact[3], contact[4], contact[5], contact[6], contact[7], contact[8])
-
-            console.print(table)
-
-            print("Enter the ID of the customer you want to edit:")
-            selected_customer_id = input("> ")
-            customer_row = data_manager.get_row_by_id(selected_customer_id)
-            print("Enter the name of the field you want to edit or 'save' to save changes:")
-            choice = input("> ").strip()
-
-            if choice.lower() == "save":
-                console.print("Customer updated successfully!", style=success_sytle)
-                time.sleep(2)
-                self.main_menu()
-                return
-            elif choice.lower() == "id":
-                console.print("Unable to edit ID!", style=error_style)
-                time.sleep(2)
-                self.edit_customer()
-                return
-            elif choice in fields:
-                field_index = fields.index(choice)
-                new_value = input(f"Enter new value for {choice}: ")
-                updated_row = customer_row.copy()
-                updated_row[field_index] = new_value
-                if data_manager.update_row_by_id(selected_customer_id, updated_row):
-                    console.print("Field updated successfully!", style=success_sytle)
-                else:
-                    console.print("Failed to update the field!", style=error_style)
-
-                time.sleep(2)
-                self.main_menu()
-            else:
-                console.print("Invalid choice!", style=error_style)
-                time.sleep(2)
-                self.edit_customer()
-        else:
-            console.print("No results found for the search query.", style=error_style)
-            time.sleep(2)
-            self.edit_customer()
-            return
-
     def get_input(self, prompt, validator, error_message, required=False):
         while True:
             console.print(prompt)
@@ -204,6 +141,100 @@ class CRM:
                 console.clear()
                 console.print(new_customer_description)
                 console.print(error_message, style=error_style)
+    
+    def edit_customer(self):
+        """
+        Edit an existing customer.
+        """
+        console.clear()
+        search_query = input("Enter search query to find customer: ").strip()
+        search_results = data_manager.search_customer(search_query)
+        fields = ["id", "firstname", "lastname", "birthday", "email", "phone", "company", "position", "relation"]
+        required_fields = {"firstname"}
+
+        if search_results:
+            search_results_table = Table(title="Search Results")
+            search_results_table.add_column("ID", justify="left", style="green")
+            search_results_table.add_column("Firstname", style="green")
+            search_results_table.add_column("Lastname", style="green")
+            search_results_table.add_column("Birthday", style="green")
+            search_results_table.add_column("Email", style="green")
+            search_results_table.add_column("Phone", style="green")
+            search_results_table.add_column("Company", style="green")
+            search_results_table.add_column("Position", style="green")
+            search_results_table.add_column("Relation", style="green")
+
+            for contact in search_results[1:]:
+                search_results_table.add_row(contact[0], contact[1], contact[2], contact[3], contact[4], contact[5], contact[6], contact[7], contact[8])
+
+            console.print(search_results_table)
+
+            print("Enter the ID of the customer you want to edit:")
+            selected_customer_id = input("> ")
+            customer_row = data_manager.get_row_by_id(selected_customer_id)
+            
+            while True:
+                print("Enter the name of the field you want to edit or 'save' to save changes:")
+                choice = input("> ").strip()
+
+                if choice.lower() == "save":
+                    console.print("Customer updated successfully!", style=success_sytle)
+                    time.sleep(2)
+                    self.main_menu()
+                    return
+                elif choice.lower() == "id":
+                    console.print("Unable to edit ID!", style=error_style)
+                    time.sleep(2)
+                elif choice in fields:
+                    field_index = fields.index(choice)
+                    required = choice in required_fields
+                    prompt = f"Enter new value for {choice}:"
+                    error_message = f"Invalid value for {choice}!"
+
+                    if choice == "firstname":
+                        validator = lambda x: Validator.not_empty(x) and Validator.max_length(x)
+                        error_message = "Firstname needs to be between 1 and 24 characters!"
+                    elif choice == "lastname":
+                        validator = lambda x: Validator.not_empty(x) and Validator.max_length(x)
+                        error_message = "Lastname needs to be between 1 and 24 characters!"
+                    elif choice == "birthday":
+                        validator = lambda x: Validator.validate_dob(x)
+                        error_message = "Please enter a valid date. (Format: YEAR/MONTH/DAY)"
+                    elif choice == "email":
+                        validator = lambda x: Validator.validate_email(x) and Validator.max_length(x)
+                        error_message = "Not a valid Email, please try again!"
+                    elif choice == "phone":
+                        validator = lambda x: Validator.validate_phone(x)
+                        error_message = "Please enter a valid phone number. (Format: 123-456-7890)"
+                    elif choice == "company":
+                        validator = lambda x: Validator.not_empty(x) and Validator.max_length(x)
+                        error_message = "Company needs to be between 1 and 24 characters!"
+                    elif choice == "position":
+                        validator = lambda x: Validator.not_empty(x) and Validator.max_length(x)
+                        error_message = "Position needs to be between 1 and 24 characters!"
+                    elif choice == "relation":
+                        validator = lambda x: Validator.not_empty(x) and Validator.max_length(x)
+                        error_message = "Relation needs to be between 1 and 24 characters!"
+                    else:
+                        validator = lambda x: True
+
+                    new_value = self.get_input(prompt, validator, error_message, required)
+                    updated_row = customer_row.copy()
+                    updated_row[field_index] = new_value
+
+                    if data_manager.update_row_by_id(selected_customer_id, updated_row):
+                        console.print("Field updated successfully!", style=success_sytle)
+                    else:
+                        console.print("Failed to update the field!", style=error_style)
+                else:
+                    console.print("Invalid choice!", style=error_style)
+
+                time.sleep(2)
+        else:
+            console.print("No results found for the search query.", style=error_style)
+            time.sleep(2)
+            self.edit_customer()
+            return
     
     def add_new_customer(self):
         """
