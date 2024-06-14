@@ -196,8 +196,10 @@ class CRM:
                               "and 128 chars!", style=error_style)
 
         search_results = data_manager.search_customer(search_query)
+
         fields = ["id", "firstname", "lastname", "birthday", "email", "phone",
                   "company", "position", "relation"]
+
         required_fields = {"firstname"}
 
         if search_results:
@@ -214,7 +216,7 @@ class CRM:
             search_results_table.add_column("Position", style="green")
             search_results_table.add_column("Relation", style="green")
 
-            for contact in search_results[1:]:
+            for contact in search_results:
                 search_results_table.add_row(contact[0], contact[1],
                                              contact[2], contact[3],
                                              contact[4], contact[5],
@@ -259,7 +261,6 @@ class CRM:
                                     Validator.max_length(x))
                         error_message = ("Firstname needs to be between 1 and "
                                          "128 characters!")
-
                     elif lowercase_choice == "lastname":
                         def validator(x):
                             return (Validator.not_empty(x) and
@@ -429,7 +430,7 @@ class CRM:
             table.add_column("Position", style="green")
             table.add_column("Relation", style="green")
 
-            for contact in search_results[1:]:
+            for contact in search_results:
                 table.add_row(contact[0], contact[1], contact[2], contact[3],
                               contact[4], contact[5], contact[6], contact[7],
                               contact[8])
