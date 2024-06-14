@@ -66,41 +66,42 @@ class CRM:
 
         print(ascii_logo)
 
-        print("What would you like to do?")
-        table = Table(title="Main Menu", width=console.width)
+        while True:  # Loop until a valid choice is made
+            print("What would you like to do?")
+            table = Table(title="Main Menu", width=console.width)
 
-        table.add_column("Option", justify="left", style="green", no_wrap=True)
-        table.add_column("Description", style="green")
+            table.add_column("Option", justify="left", style="green")
+            table.add_column("Description", style="green")
 
-        table.add_row("1", "See all customers")
-        table.add_row("2", "Search customer")
-        table.add_row("3", "Edit customer")
-        table.add_row("4", "Add new customer")
-        table.add_row("5", "Delete customer")
-        table.add_row("6", "Send an email")
-        table.add_row("7", "Exit")
+            table.add_row("1", "See all customers")
+            table.add_row("2", "Search customer")
+            table.add_row("3", "Edit customer")
+            table.add_row("4", "Add new customer")
+            table.add_row("5", "Delete customer")
+            table.add_row("6", "Send an email")
+            table.add_row("7", "Exit")
 
-        print(table)
-        choice = input("> ").strip()
+            print(table)
+            choice = input("> ").strip()
 
-        if choice == '1':
-            self.show_all_customers()
-        elif choice == '2':
-            self.search_customer()
-        elif choice == '3':
-            self.edit_customer()
-        elif choice == '4':
-            self.add_new_customer()
-        elif choice == '5':
-            self.delete_customer()
-        elif choice == '6':
-            self.send_customer_email()
-        elif choice == '7':
-            console.print("Exiting the program. Goodbye!")
-            return
-        else:
-            console.print("Invalid choice, please select a valid option.",
-                          style=error_style)
+            if choice == '1':
+                self.show_all_customers()
+            elif choice == '2':
+                self.search_customer()
+            elif choice == '3':
+                self.edit_customer()
+            elif choice == '4':
+                self.add_new_customer()
+            elif choice == '5':
+                self.delete_customer()
+            elif choice == '6':
+                self.send_customer_email()
+            elif choice == '7':
+                console.print("Exiting the program. Goodbye!")
+                return
+            else:
+                console.print("Invalid choice, please select a valid option.",
+                              style=error_style)
 
     def get_input(self, prompt, validator, error_message, required=False):
         """
