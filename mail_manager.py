@@ -1,4 +1,6 @@
 import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
 
 
 class MailManager:
@@ -11,9 +13,18 @@ class MailManager:
         :param message: The body content of the email.
         :param password: The password for the sender's email account.
         """
+        from_address = "console.crm.sender@gmail.com"
+
+        msg = MIMEMultipart()
+        msg['From'] = from_address
+        msg['To'] = receiver_mail
+        msg['Subject'] = subject
+
+        msg.attach(MIMEText(message, 'plain', 'utf-8'))
+
         server = smtplib.SMTP("smtp.gmail.com", 587)
         server.starttls()
-        text = f"Subject: {subject}\n\n{message}"
-        server.login("console.crm.sender@gmail.com", password)
-        server.sendmail("console.crm.sender@gmail.com", receiver_mail, text)
+        server.login(from_address, password)
+
+        server.send_message(msg)
         server.quit()
