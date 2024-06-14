@@ -237,6 +237,7 @@ class CRM:
                 console.print("Enter the name of the field you want to edit "
                               "or 'save' to save changes:")
                 choice = input("> ").strip()
+                lowercase_choice = choice.lower()
 
                 if choice.lower() == "save":
                     console.print("Customer updated successfully!",
@@ -247,53 +248,52 @@ class CRM:
                 elif choice.lower() == "id":
                     console.print("Unable to edit ID!", style=error_style)
                     time.sleep(2)
-                elif choice in fields:
-                    field_index = fields.index(choice)
-                    required = choice in required_fields
+                if lowercase_choice in [field.lower() for field in fields]:
+                    field_index = fields.index(lowercase_choice)
+                    required = lowercase_choice in required_fields
                     prompt = f"Enter new value for {choice}:"
                     error_message = f"Invalid value for {choice}!"
-
-                    if choice == "firstname":
+                    if lowercase_choice == "firstname":
                         def validator(x):
                             return (Validator.not_empty(x) and
                                     Validator.max_length(x))
                         error_message = ("Firstname needs to be between 1 and "
                                          "128 characters!")
 
-                    elif choice == "lastname":
+                    elif lowercase_choice == "lastname":
                         def validator(x):
                             return (Validator.not_empty(x) and
                                     Validator.max_length(x))
                         error_message = ("Lastname needs to be between 1 and "
                                          "128 characters!")
-                    elif choice == "birthday":
+                    elif lowercase_choice == "birthday":
                         def validator(x):
                             return Validator.validate_dob(x)
                         error_message = ("Please enter a valid date. "
                                          "(Format: YEAR/MONTH/DAY)")
-                    elif choice == "email":
+                    elif lowercase_choice == "email":
                         def validator(x):
                             return (Validator.validate_email(x) and
                                     Validator.max_length(x))
                         error_message = "Not a valid Email, please try again!"
-                    elif choice == "phone":
+                    elif lowercase_choice == "phone":
                         def validator(x):
                             return Validator.validate_phone(x)
                         error_message = ("Please enter a valid phone number. "
                                          "(Format: 123-456-7890)")
-                    elif choice == "company":
+                    elif lowercase_choice == "company":
                         def validator(x):
                             return (Validator.not_empty(x) and
                                     Validator.max_length(x))
                         error_message = ("Company needs to be between 1 and "
                                          "128 characters!")
-                    elif choice == "position":
+                    elif lowercase_choice == "position":
                         def validator(x):
                             return (Validator.not_empty(x) and
                                     Validator.max_length(x))
                         error_message = ("Position needs to be between 1 and "
                                          "128 characters!")
-                    elif choice == "relation":
+                    elif lowercase_choice == "relation":
                         def validator(x):
                             return (Validator.not_empty(x) and
                                     Validator.max_length(x))
