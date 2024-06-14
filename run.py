@@ -186,7 +186,15 @@ class CRM:
         of various fields. Validates input before updating the record.
         """
         console.clear()
-        search_query = input("Enter search query to find customer: ").strip()
+        while True:
+            search_query = input("Enter search query: ").strip()
+            if (lambda x: Validator.not_empty(x) and
+                    Validator.max_length(x))(search_query):
+                break
+            else:
+                console.print("Invalid input. Search query must be between 1 "
+                              "and 128 chars!", style=error_style)
+
         search_results = data_manager.search_customer(search_query)
         fields = ["id", "firstname", "lastname", "birthday", "email", "phone",
                   "company", "position", "relation"]
