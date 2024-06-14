@@ -1,6 +1,7 @@
 import gspread
 from google.oauth2.service_account import Credentials
 
+
 class DataManager:
     SCOPE = [
         "https://www.googleapis.com/auth/spreadsheets",
@@ -13,7 +14,7 @@ class DataManager:
         Initializes the DataManager instance with Google Sheets credentials,
         and opens the specified spreadsheet and worksheet.
 
-        :param google_sheets_creds: Service account credentials for Google Sheets API.
+        :param google_sheets_creds: Service account credentials for Sheets API.
         :param spreadsheet_name: Name of the Google Sheets spreadsheet.
         :param worksheet_name: Name of the worksheet within the spreadsheet.
         """
@@ -22,7 +23,7 @@ class DataManager:
         self.client = gspread.authorize(self.scoped_creds)
         self.sheet = self.client.open(spreadsheet_name)
         self.worksheet = self.sheet.worksheet(worksheet_name)
-    
+
     def get_all_data(self):
         """
         Retrieve all data from the worksheet.
@@ -30,7 +31,7 @@ class DataManager:
         :return: A list of lists representing all data rows in the worksheet.
         """
         return self.worksheet.get_all_values()
-    
+
     def get_row(self, row_index):
         """
         Retrieve data from a specific row.
@@ -40,7 +41,7 @@ class DataManager:
         :return: A list representing the data in the specified row.
         """
         return self.worksheet.row_values(row_index)
-    
+
     def get_row_by_id(self, id):
         """
         Retrieve a row by its ID.
@@ -71,7 +72,7 @@ class DataManager:
                 last_id = int(id_col[-2]) if len(id_col) > 1 else 0
         else:
             last_id = 0
-        
+
         next_id = last_id + 1
         new_row = [next_id] + values
         self.worksheet.append_row(new_row)
@@ -99,7 +100,7 @@ class DataManager:
             return True
         except ValueError:
             return False
-        
+
     def search_customer(self, query):
         """
         Search for customers based on a query.
@@ -116,7 +117,7 @@ class DataManager:
                 search_results.append(row)
 
         return search_results
-    
+
     def update_row_by_id(self, id, new_values):
         """
         Update a row by its ID with new values.
@@ -134,4 +135,3 @@ class DataManager:
             return True
         except ValueError:
             return False
-
