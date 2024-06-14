@@ -1,32 +1,24 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+# Console CRM
 
-Welcome,
+Console CRM is a Python-based terminal application designed to manage customer relationships effectively. Integrated with the Google Sheets API, this tool offers essential CRM functions directly from the console, making it a versatile solution for businesses seeking a lightweight and accessible customer management system. The application is deployed on Heroku, ensuring it is always accessible and easy to use.
 
-This is the Code Institute student template for deploying your third portfolio project, the Python command-line project. The last update to this file was: **May 14, 2024**
+You can view and test the project [here](https://console-crm-23bb748056f0.herokuapp.com/)
 
-## Reminders
+![ConsoleCRM Mockup](documentation/mockup.png)
 
-- Your code must be placed in the `run.py` file
-- Your dependencies must be placed in the `requirements.txt` file
-- Do not edit any of the other files or your code may not deploy properly
+## Project Rationale
+Console CRM was developed to address the need for an accessible, efficient, and user-friendly customer relationship management system. By integrating essential CRM functions with the power of Python and Google Sheets, Console CRM aims to streamline customer management processes for businesses of all sizes.
 
-## Creating the Heroku app
+### Key Project Goals:
+-   **Simplifying Customer Management:** Provide a straightforward platform for businesses to manage customer information without the complexity of larger CRM systems.
+-   **Enhancing Data Accessibility:** Utilize Google Sheets for easy data access, updates, and collaboration.
+-   **Automating Routine Tasks:** Reduce the manual effort required to manage customer data, improving overall efficiency and accuracy.
 
-When you create the app, you will need to add two buildpacks from the _Settings_ tab. The ordering is as follows:
+### Target Audience
+Console CRM is designed for a diverse range of users who need a reliable CRM solution:
 
-1. `heroku/python`
-2. `heroku/nodejs`
+-   **Small to Mid-Sized Businesses:** Companies looking for a cost-effective CRM solution that is easy to implement and use.
+-   **Sales and Marketing Teams:** Professionals who need to manage customer interactions and track communications efficiently.
+-   **Freelancers and Consultants:** Individuals who require a simple yet effective way to maintain client relationships and streamline their workflows.
 
-You must then create a _Config Var_ called `PORT`. Set this to `8000`
-
-If you have credentials, such as in the Love Sandwiches project, you must create another _Config Var_ called `CREDS` and paste the JSON into the value field.
-
-Connect your GitHub repository and deploy as normal.
-
-## Constraints
-
-The deployment terminal is set to 80 columns by 24 rows. That means that each line of text needs to be 80 characters or less otherwise it will be wrapped onto a second line.
-
----
-
-Happy coding!
+By addressing the needs of these groups, Console CRM aims to become a vital tool in managing customer relationships, improving productivity, and fostering business growth.
