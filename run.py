@@ -215,8 +215,14 @@ class CRM:
             console.print(search_results_table)
 
             print("Enter the ID of the customer you want to edit:")
-            selected_customer_id = input("> ")
-            customer_row = data_manager.get_row_by_id(selected_customer_id)
+            while True:
+                selected_customer_id = input("> ")
+                customer_row = data_manager.get_row_by_id(selected_customer_id)
+
+                if customer_row is not None:
+                    break
+                else:
+                    print("Invalid ID. Please try again.")
 
             while True:
                 console.print("Enter the name of the field you want to edit "
