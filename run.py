@@ -397,7 +397,16 @@ class CRM:
         Returns to the main menu after displaying results.
         """
         console.clear()
-        search_query = input("Enter search query: ").strip()
+
+        while True:
+            search_query = input("Enter search query: ").strip()
+            if (lambda x: Validator.not_empty(x) and
+                    Validator.max_length(x))(search_query):
+                break
+            else:
+                console.print("Invalid input. Search query must be between 1 "
+                              "and 128 chars!", style=error_style)
+
         search_results = data_manager.search_customer(search_query)
 
         if search_results:
