@@ -26,7 +26,7 @@ worksheet_name = 'contacts'
 
 # Define styles
 error_style = Style(color="red", blink=True, bold=True)
-success_sytle = Style(color="green", blink=True, bold=True)
+success_style = Style(color="green", blink=True, bold=True)
 
 # Initialize the data manager
 with console.status("[bold green]Connecting to Database...") as status:
@@ -178,7 +178,7 @@ class CRM:
                 choice = input("> ").strip()
 
                 if choice.lower() == "save":
-                    console.print("Customer updated successfully!", style=success_sytle)
+                    console.print("Customer updated successfully!", style=success_style)
                     time.sleep(2)
                     self.main_menu()
                     return
@@ -223,7 +223,7 @@ class CRM:
                     updated_row[field_index] = new_value
 
                     if data_manager.update_row_by_id(selected_customer_id, updated_row):
-                        console.print("Field updated successfully!", style=success_sytle)
+                        console.print("Field updated successfully!", style=success_style)
                     else:
                         console.print("Failed to update the field!", style=error_style)
                 else:
@@ -294,7 +294,7 @@ class CRM:
 
         console.clear()
         data_manager.append_row([firstname, lastname, dob, email, phone, company, position, relation])
-        console.print("A new customer was successfully created!", style=success_sytle)
+        console.print("A new customer was successfully created!", style=success_style)
         time.sleep(2)
 
         self.main_menu()
@@ -355,7 +355,7 @@ class CRM:
                 confirmation = input("Are you sure you want to delete this customer? (yes/no): ").strip().lower()
                 if confirmation == "yes":
                     data_manager.delete_row_by_id(deleted_customer_id)
-                    console.print("Customer deleted successfully!", style=success_sytle)
+                    console.print("Customer deleted successfully!", style=success_style)
                 elif confirmation == "no":
                     console.print("Customer deletion cancelled.", style=error_style)
                 else:
@@ -409,7 +409,7 @@ class CRM:
                 message = self.get_multiline_input("Enter the email body. Write exit to finish:")
                 mailer = MailManager()
                 mailer.send_mail(receiver_mail, subject, message, app_password)
-                console.print("Email sent successfully!", style=success_sytle)
+                console.print("Email sent successfully!", style=success_style)
             else:
                 console.print("Invalid ID. Returning to the main menu.", style=error_style)
         else:
