@@ -67,7 +67,7 @@ class CRM:
         print(ascii_logo)
 
         print("What would you like to do?")
-        table = Table(title="Main Menu")
+        table = Table(title="Main Menu", width=console.width)
 
         table.add_column("Option", justify="left", style="green", no_wrap=True)
         table.add_column("Description", style="green")
@@ -157,7 +157,7 @@ class CRM:
         console.clear()
         customers = data_manager.get_all_data()
         if customers:
-            table = Table(title="All Customers")
+            table = Table(title="All Customers", width=console.width)
             table.add_column("Firstname", justify="left", style="green")
             table.add_column("Lastname", style="green")
             table.add_column("Birthday", style="green")
@@ -192,7 +192,8 @@ class CRM:
         required_fields = {"firstname"}
 
         if search_results:
-            search_results_table = Table(title="Search Results")
+            search_results_table = Table(title="Search Results",
+                                         width=console.width)
             search_results_table.add_column("ID", justify="left",
                                             style="green")
             search_results_table.add_column("Firstname", style="green")
@@ -393,7 +394,7 @@ class CRM:
         search_results = data_manager.search_customer(search_query)
 
         if search_results:
-            table = Table(title="Search Results")
+            table = Table(title="Search Results", width=console.width)
             table.add_column("ID", justify="left", style="green")
             table.add_column("Firstname", style="green")
             table.add_column("Lastname", style="green")
@@ -428,7 +429,7 @@ class CRM:
         search_results = data_manager.search_customer(search_query)
 
         if search_results:
-            table = Table(title="Search Results")
+            table = Table(title="Search Results", width=console.width)
             table.add_column("ID", justify="left", style="green")
             table.add_column("Firstname", style="green")
             table.add_column("Lastname", style="green")
@@ -485,7 +486,7 @@ class CRM:
         search_results = data_manager.search_customer(search_query)
 
         if search_results:
-            table = Table(title="Search Results")
+            table = Table(title="Search Results", width=console.width)
             table.add_column("ID", justify="left", style="green")
             table.add_column("Firstname", style="green")
             table.add_column("Lastname", style="green")
