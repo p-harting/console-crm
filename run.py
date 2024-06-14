@@ -49,15 +49,21 @@ new_customer_description = (
 
 class CRM:
     def __init__(self):
-        # Print welcome message
+        """
+        Initializes the ConsoleCRM instance and prints a welcome message.
+        """
         print("Welcome in your [bold green]ConsoleCRM[/bold green]!")
 
     def run(self):
+        """
+        Starts the ConsoleCRM application by displaying the main menu.
+        """
         self.main_menu()
 
     def main_menu(self):
         """
-        Starts the main menu
+        Displays the main menu, handles user input for various customer-related actions,
+        and directs the user to the appropriate method based on their choice.
         """
         console.clear()
 
@@ -93,14 +99,58 @@ class CRM:
         elif choice == '6':
             self.send_customer_email()
         elif choice == '7':
-            print("Exiting the program. Goodbye!")
+            console.print("Exiting the program. Goodbye!")
             return
         else:
-            print("[bold red]Invalid choice, please select a valid option.[/bold red]")
+            console.print("Invalid choice, please select a valid option.", style=error_style)
+    
+    def get_input(self, prompt, validator, error_message, required=False):
+        """
+        Prompts the user for input, validates the input using a provided validator function,
+        and handles errors and required fields. Returns the validated input or a default
+        value if specified.
+
+        :param prompt: The message to display to the user.
+        :param validator: A function to validate the user's input.
+        :param error_message: The message to display if the validation fails.
+        :param required: A boolean indicating if the input is required. Defaults to False.
+        """
+        while True:
+            console.print(prompt)
+            value = input("> ").strip()
+            if required and Validator.backslash(value):
+                console.clear()
+                console.print(new_customer_description)
+                console.print(error_message, style=error_style)
+            elif not required and Validator.backslash(value):
+                return "/"
+            elif validator(value):
+                return value
+            else:
+                console.clear()
+                console.print(new_customer_description)
+                console.print(error_message, style=error_style)
+    
+    def get_multiline_input(self, prompt):
+        """
+        Prompts the user to input multiple lines of text until they type 'exit'.
+        Returns the concatenated string of all input lines.
+        :param prompt: The prompt message to display to the user.
+        :return: A string containing the concatenated input lines.
+        """
+        print(prompt)
+        lines = []
+        while True:
+            line = input()
+            if line.strip().lower() == "exit":
+                break
+            lines.append(line)
+        return "\n".join(lines)
     
     def show_all_customers(self):
         """
-        Display all customers
+        Displays all customers in a formatted table. If no customers are found, notifies the user.
+        After displaying, waits for user input to return to the main menu.
         """
         console.clear()
         customers = data_manager.get_all_data()
@@ -120,31 +170,16 @@ class CRM:
 
             console.print(table)
         else:
-            print("[bold red]No customers found.[/bold red]")
+            console.print("No customers found.", style=error_style)
 
         input("Press Enter to return to the main menu...")
         self.main_menu()
     
-    def get_input(self, prompt, validator, error_message, required=False):
-        while True:
-            console.print(prompt)
-            value = input("> ").strip()
-            if required and Validator.backslash(value):
-                console.clear()
-                console.print(new_customer_description)
-                console.print(error_message, style=error_style)
-            elif not required and Validator.backslash(value):
-                return "/"
-            elif validator(value):
-                return value
-            else:
-                console.clear()
-                console.print(new_customer_description)
-                console.print(error_message, style=error_style)
-    
     def edit_customer(self):
         """
-        Edit an existing customer.
+        Allows editing of existing customer information based on ID.
+        Displays search results for customer lookup and supports editing
+        of various fields. Validates input before updating the record.
         """
         console.clear()
         search_query = input("Enter search query to find customer: ").strip()
@@ -238,7 +273,8 @@ class CRM:
     
     def add_new_customer(self):
         """
-        Add a new customer
+        Guides user through adding a new customer with basic details, validates inputs,
+        and stores the new customer in the data manager. Returns to main menu afterward.
         """
         console.clear()
         console.print(new_customer_description)
@@ -300,6 +336,11 @@ class CRM:
         self.main_menu()
     
     def search_customer(self):
+        """
+        Allows user to search for customers based on a query input.
+        Displays search results in a formatted table if matches are found.
+        Returns to the main menu after displaying results.
+        """
         console.clear()
         search_query = input("Enter search query: ").strip()
         search_results = data_manager.search_customer(search_query)
@@ -327,6 +368,11 @@ class CRM:
         self.main_menu()
     
     def delete_customer(self):
+        """
+        Allows user to search for and delete a customer based on a query input.
+        Displays search results in a table and prompts for confirmation before deletion.
+        Returns to the main menu after completing the deletion process.
+        """
         console.clear()
         search_query = input("Enter search query: ").strip()
         search_results = data_manager.search_customer(search_query)
@@ -369,6 +415,11 @@ class CRM:
         self.main_menu()
 
     def send_customer_email(self):
+        """
+        Allows user to search for a customer and send an email to the selected customer.
+        Displays search results in a table and prompts for email details (subject and body).
+        Sends the email using MailManager and returns to the main menu after completion.
+        """
         console.clear()
         search_query = input("Enter search query to find customer: ").strip()
         search_results = data_manager.search_customer(search_query)
@@ -418,18 +469,10 @@ class CRM:
         input("Press Enter to return to the main menu...")
         self.main_menu()
 
-    
-    def get_multiline_input(self, prompt):
-        print(prompt)
-        lines = []
-        while True:
-            line = input()
-            if line.strip().lower() == "exit":
-                break
-            lines.append(line)
-        return "\n".join(lines)
-
 def main():
+    """
+    Creates an instance of the CRM application and starts it by calling the 'run' method.
+    """
     app = CRM()
     app.run()
 
