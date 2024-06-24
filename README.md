@@ -107,20 +107,20 @@ Sarah is a marketing manager who oversees a team responsible for client relation
 Console CRM offers a comprehensive set of features designed to streamline customer relationship management through an intuitive and efficient console-based interface. Here’s a breakdown of the key functionalities:
 
 ### Customer Management
-
+![Main Menu](documentation/screenshots/main-menu-screenshot.PNG)
 -   **Add New Customers:** Easily add new customer records to the database, including essential contact information and notes.
 -   **Edit Existing Customers:** Update customer details with new information to keep records current and accurate.
 -   **Delete Customers:** Remove obsolete or incorrect customer entries to maintain a clean and relevant database.
 -   **Search Customers:** Quickly locate customer records using powerful search functionality to find specific details swiftly.
 
 ### Data Integration and Accessibility
-
+![List of customers](documentation/screenshots/show-customers-screenshot.PNG)
 -   **Google Sheets Integration:** Seamlessly sync customer data with Google Sheets, ensuring easy access, updates, and collaboration.
 -   **Real-Time Updates:** Perform customer operations with instantaneous updates, ensuring all users see the latest information without delay.
 -   **Heroku Deployment:** Access the CRM from anywhere with an internet connection, thanks to its deployment on Heroku.
 
 ### Automation and Efficiency
-
+![Email sending](documentation/screenshots/email-screenshot.PNG)
 -   **Automated Email Communication:** Send emails directly from the CRM, automating routine communication tasks and saving time.
 -   **Data Validation:** Ensure data accuracy with built-in validation checks that prevent errors and inconsistencies.
 
