@@ -129,6 +129,31 @@ Console CRM offers a comprehensive set of features designed to streamline custom
 -   **Rich Text Formatting:** Utilize the `rich` library to enhance the console interface with colorful and styled text outputs for better readability.
 -   **Intuitive Commands:** Access all CRM functionalities through simple and clear console commands, making it easy to navigate and use.
 
+## Flowcharts
+
+Main menu logic:
+```mermaid
+graph TD;
+    Start[Start] --> Initialize[Initialize ConsoleCRM];
+    Initialize --> ConnectDB[Connect to Database];
+    ConnectDB --> DisplayMenu[Display Main Menu];
+    DisplayMenu --> UserInput{User Input};
+    UserInput -- Choice 1 --> ShowAll[Show all customers];
+    UserInput -- Choice 2 --> Search[Search customer];
+    UserInput -- Choice 3 --> Edit[Edit customer];
+    UserInput -- Choice 4 --> Add[Add new customer];
+    UserInput -- Choice 5 --> Delete[Delete customer];
+    UserInput -- Choice 6 --> SendEmail[Send an email];
+    UserInput -- Choice 7 --> Exit[Exit Program];
+    ShowAll --> DisplayMenu;
+    Search --> DisplayMenu;
+    Edit --> DisplayMenu;
+    Add --> DisplayMenu;
+    Delete --> DisplayMenu;
+    SendEmail --> DisplayMenu;
+    Exit --> End[End];
+```
+
 ## Technologies Used
 
 **Python:**  
