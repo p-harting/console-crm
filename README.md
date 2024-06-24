@@ -131,7 +131,7 @@ Console CRM offers a comprehensive set of features designed to streamline custom
 
 ## Flowcharts
 
-Main menu logic:
+**main_menu:**
 ```mermaid
 graph TD;
     Start[Start] --> Initialize[Initialize ConsoleCRM];
@@ -152,6 +152,99 @@ graph TD;
     Delete --> DisplayMenu;
     SendEmail --> DisplayMenu;
     Exit --> End[End];
+```
+
+**show_all_customers:**
+```mermaid
+graph TD;
+    A[Start] --> B(Show All Customers)
+    B --> C{Customers Found?}
+    C -- Yes --> D[Display Customers]
+    C -- No --> E[Display Message: No customers found.]
+    D --> F(Return to Main Menu)
+    E --> F(Return to Main Menu)
+    F --> G[End]
+```
+
+**search_customer:**
+```mermaid
+graph TD;
+    A[Start] --> B(Search Customer)
+    B --> C{Customers Found?}
+    C -- Yes --> D[Display Search Results]
+    C -- No --> E[Display Message: No matching customers found.]
+    D --> F[Return to Main Menu]
+    E --> F[Return to Main Menu]
+    F --> G[End]
+```
+
+**edit_customer:**
+```mermaid
+graph TD;
+    Start --> A;
+    A[Search Query Input] --> B;
+    B{Valid} -->|Yes| C[Search Customers];
+    B -->|No| O[Display Error Message];
+    C{Results Found} -->|Yes| D[Display Search Results];
+    C -->|No| P[Display No Results Message];
+    D --> E[Select Customer ID to Edit];
+    E --> F{Field to Edit or Save};
+    F -->|Save| G[Save Changes];
+    G --> H[Display Success Message];
+    H --> I[Return to Main Menu];
+    F -->|Field| J[Edit Field Value];
+    J --> K{Validation};
+    K -->|Valid| L[Update Field];
+    L --> M[Display Success Message];
+    K -->|Invalid| N[Display Error Message];
+    N --> J;
+    P --> Q[Return to Main Menu];
+```
+
+**add_new_customer:**
+```mermaid
+graph TD;
+    A[Start] --> B(Add New Customer)
+    B --> C{Input Customer Details}
+    C --> D{Validation}
+    D -- Valid --> E[Save Customer]
+    D -- Invalid --> F[Display Error Message]
+    E --> G[Customer Added Successfully]
+    F --> C
+    G --> H[Return to Main Menu]
+    H --> I[End]
+```
+
+**delete_customer:**
+```mermaid
+graph TD;
+    A[Start] --> B(Delete Customer)
+    B --> C{Search for Customer}
+    C --> D{Customer Found?}
+    D -- Yes --> E(Confirm Deletion)
+    E --> F{Confirmation: Yes/No}
+    F -- Yes --> G[Delete Customer]
+    F -- No --> B(Re-enter ID)
+    D -- No --> H[Display Message: No matching customers found.]
+    G --> I[Customer Deleted Successfully]
+    H --> A(Return to Main Menu)
+    I --> J[End]
+```
+
+**send_customer_email:**
+```mermaid
+graph TD;
+    A[Start] --> B(Send Customer Email)
+    B --> C{Search for Customer}
+    C --> D{Customer Found?}
+    D -- Yes --> E(Select Customer)
+    E --> F{Input Email Details}
+    F --> G[Send Email]
+    G --> H[Email Sent Successfully]
+    D -- No --> I[Display Message: No matching customers found.]
+    H --> J[Return to Main Menu]
+    I --> A(Return to Main Menu)
+    J --> K[End]
 ```
 
 ## Technologies Used
