@@ -129,6 +129,22 @@ Console CRM offers a comprehensive set of features designed to streamline custom
 -   **Rich Text Formatting:** Utilize the `rich` library to enhance the console interface with colorful and styled text outputs for better readability.
 -   **Intuitive Commands:** Access all CRM functionalities through simple and clear console commands, making it easy to navigate and use.
 
+### Future Features
+
+Console CRM is continuously evolving to enhance user experience and functionality. Here are planned future features:
+
+-   **Mass Email Communication:** Enable sending emails to all customers or specific groups directly from the CRM.
+    
+-   **Customer Groups:** Implement the ability to categorize customers into groups for better organization and targeted communication.
+    
+-   **Batch Customer Deletion:** Allow deletion of multiple customers at once to streamline database maintenance.
+    
+-   **Communication History:** Provide a log of communications with customers, including emails and other interactions.
+    
+-   **Bulk Customer Upload/Import:** Enable the upload, addition, or import of multiple customers simultaneously to expedite database population and updates.
+    
+These features are designed to further streamline customer relationship management, enhance productivity, and provide additional flexibility in managing customer interactions and data.
+
 ## Flowcharts
 
 **main_menu:**
