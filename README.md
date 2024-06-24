@@ -251,6 +251,19 @@ I shared the application with peers, colleagues, and friends, requesting their f
 
 ### Bugs
 
+-   **Rich library not added to requirements:**  
+    Manually added due to compatibility issues with pip during installation.
+    
+-   **MailManager crashing due to UTF-8 encoding errors (unable to handle ä, ü, and ö):**  
+    Fixed by incorporating the `email.mime` library to handle character encoding properly.
+    
+-   **First search results not displaying when searching customers:**  
+    Resolved by removing `[1:]` to ensure all search results are correctly displayed.
+    
+-   **Main menu crashing on incorrect input:**  
+    Implemented a while loop to prompt for valid input until a correct choice is made, preventing crashes.
+
+
 ## Deployment
 
 ### Set Up the Google Sheet
