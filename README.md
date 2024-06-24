@@ -208,3 +208,159 @@ Facilitates OAuth 2.0 authentication flows for accessing Google Sheets.
 Allows interaction with Google Sheets, used for storing and updating customer data.
 
 These libraries and modules are essential for the application’s core functionalities and are listed in the `requirements.txt` file for easy installation using `pip`.
+
+## Testing
+
+### PEP8 Validation
+
+I validated the code using the CI Python Linter [PEP8 CI Linter](https://pep8ci.herokuapp.com/#), ensuring that the code met PEP8 guidelines.
+
+-   **run.py:**  
+    ![run.py testing](documentation/screenshots/run-test.PNG)
+-   **data_manager.py:**  
+    ![run.py testing](documentation/screenshots/data-test.PNG)
+-   **validator.py:**  
+    ![run.py testing](documentation/screenshots/validator-test.PNG)
+-   **mail_manager.py:**  
+    ![run.py testing](documentation/screenshots/mail-test.PNG)
+
+### Manual Testing
+
+I performed the following tests. All passed with expected results.
+
+-   **Validation of Customer Data Input:**
+    -   Tested for string inputs, negative numbers, special characters
+-   **Search Functionality:**
+    -   Verified searching for existing and non-existing customers
+-   **Edit Customer Data:**
+    -   Ensured data updates correctly and displays the updated information
+-   **Add New Customer:**
+    -   Confirmed new customer is added correctly to the Google Sheets
+-   **Delete Customer:**
+    -   Verified the customer is removed from the Google Sheets
+-   **Send Email:**
+    -   Tested email sending functionality, ensuring emails are sent and received
+-   **API Error Handling:**
+    -   Simulated connectivity issues and checked for graceful error handling without crashing
+-   **User Interface:**
+    -   Confirmed that all terminal outputs are clear, color-coded appropriately using `Colorama`
+
+### Peer Review
+
+I shared the application with peers, colleagues, and friends, requesting their feedback and insights. They tested various features and provided valuable input on usability and functionality.
+
+### Bugs
+
+## Deployment
+
+### Set Up the Google Sheet
+
+1.  **Sign in to your Google Account:**
+    
+    -   Make sure you're signed in with your personal Google account.
+2.  **Create a Google Sheets file:**
+    
+    -   Navigate to Google Sheets (sheets.google.com) and click on the "+ Blank" button to create a new spreadsheet.
+3.  **Navigate to the Google API Library:**
+    
+    -   Go to the Google API Library (console.developers.google.com).
+4.  **Create a new project:**
+    
+    -   Click on the dropdown on the navbar to create a new project.
+5.  **Enable Google Sheets API:**
+    
+    -   Search for the "Google Sheets API" and enable it. This can take up to 10 seconds.
+6.  **Create Credentials:**
+    
+    -   In the "APIs and services" navbar on the left, go to the "Credentials tab". Click on "+ CREATE CREDENTIALS" and select "Service Account".
+7.  **Provide Service Account Details:**
+    
+    -   In the first step (service account details), provide a name for the service account, e.g., "guess-weather-service" and click on "Create and continue".
+8.  **Grant Service Account Access:**
+    
+    -   In the second step, grant the service account access to the project. You can select a role from the dropdown menu, such as "Project" > "Editor". Click on "Continue".
+9.  **Generate Key:**
+    
+    -   In the third step, click on "+ CREATE KEY" button. Select "JSON" as the key type, and click "Create". This will trigger the download of a JSON file which contains your service account credentials.
+10.  **Secure JSON file:**
+    
+	   -   Save this file in a safe folder for further use. This file can be downloaded only once!
+11.  **Share the Google Sheets file with your Service Account:**
+    
+	   - In order for your service account to access your Google Sheets file, you need to share the file with it. You can do this by going to your Google Sheets file, clicking on the "Share" button in the top right corner above the worksheet, and entering the email address of your service account (you can find this in the JSON file you downloaded earlier).
+
+### Create Repositories
+
+1.  **Register GitHub account if you don't have one.**
+    
+2.  **Go to My GitHub page.**
+    
+3.  **Fork the Repository:**
+    
+    -   Click on the "Fork" button at the top right corner of the page. This will create a copy of the repository in your GitHub account.
+4.  **Clone the Forked Repository:**
+    
+    -   Navigate to your forked repository on GitHub. Click on the "Code" button and copy the URL provided under "Clone with HTTPS" or "Clone with SSH" depending on your preference.
+5.  **Clone the Repository Locally:**
+    
+    -   Open your terminal or command prompt. Change the current working directory to the location where you want the cloned directory. Type `git clone`, and then paste the URL you copied earlier. For example:
+        `git clone https://github.com/p-harting/console-crm.git` 
+        
+    -   Press Enter to create your local clone.
+6.  **Make Changes Locally and stage and Push them to your remote repository as needed.**
+    
+7.  **Include your creds.json file in .gitignore:**
+    
+    -   Ensure your `creds.json` file is added to the `.gitignore` file to avoid pushing it to a public repository like GitHub.
+
+### Install Python Libraries
+
+1.  **Install necessary Python libraries using requirements.txt:**
+    -   run the following command in your Python environment to install the libraries:
+        `pip install -r requirements.txt` 
+        
+
+### Set up Python Client
+
+1.  **Copy the JSON key file:**
+    
+    -   COPY the JSON key file you saved as per the instructions above to your project root directory.
+2.  **Rename the file to creds.json:**
+    
+    -   IMPORTANT! Rename this file exactly `creds.json`.
+   
+### Deployment to Heroku
+
+1.  **Set dependencies:**
+    
+    -   Run the following command in the terminal to set up project dependencies:
+        `pip3 freeze > requirements.txt`
+    -   Additionally, you will need to manually add the `rich` library to your project dependencies, as it does not appear in the list generated by `pip freeze`. For more details, refer to the bugs section.
+        
+2.  **Create a Heroku account if you don't have one.**
+    
+3.  **Login and create a new app:**
+    
+    -   Name your app, choose region, and hit 'Create app'.
+4.  **Set Config Vars:**
+    
+    -   Go to the app settings page on Heroku, and in the Config Vars section:
+        -   Add `CREDS` with the value of your `creds.json` contents.
+        -   Add `PORT` with the value `8000`.
+5.  **Set Buildpacks:**
+    
+    -   Add Python and Node.js buildpacks in the buildpacks section.
+6.  **Deploy from GitHub:**
+    
+    -   Connect your GitHub repository to Heroku.
+    -   Enable automatic deploys if desired.
+    -   Click "Deploy Branch" to deploy the app.
+
+## Credits
+
+This project was developed as part of my coursework at Code Institute, where I have gained substantial experience in Python programming. The knowledge and skills acquired during my studies have been crucial in the successful implementation of Console CRM.
+
+- The ASCII text generator used for the logo was sourced from [TAAG](https://patorjk.com/software/taag/#p=display&f=Big&t=ConsoleCRM).
+- Techniques on how and why to use `@staticmethod` were referenced from [Stack Overflow](https://stackoverflow.com/questions/136097/what-is-the-difference-between-staticmethod-and-classmethod-in-python).
+- Regex for email validation was inspired by the guide provided by [ZeroBounce](https://www.zerobounce.net/python-email-verification/).
+- The tutorial on sending emails in Python was followed from a [YouTube video](https://www.youtube.com/watch?v=ueqZ7RL8zxM).
