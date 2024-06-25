@@ -6,6 +6,43 @@ You can view and test the project [here](https://console-crm-23bb748056f0.heroku
 
 ![ConsoleCRM Mockup](documentation/mockup.png)
 
+## Table of Contents
+1. [Introduction](#introduction)
+2. [Project Rationale](#project-rationale)
+   - [Key Project Goals](#key-project-goals)
+   - [Target Audience](#target-audience)
+   - [User Stories](#user-stories)
+     - [Demographics](#demographics)
+     - [Background](#background)
+     - [Motivations and Goals](#motivations-and-goals)
+     - [How Sarah Uses the Console CRM](#how-sarah-uses-the-console-crm)
+     - [Why Sarah Loves the Console CRM](#why-sarah-loves-the-console-crm)
+     - [Detailed User Journey](#detailed-user-journey)
+     - [User Benefits](#user-benefits)
+3. [Features](#features)
+   - [Customer Management](#customer-management)
+   - [Data Integration and Accessibility](#data-integration-and-accessibility)
+   - [Automation and Efficiency](#automation-and-efficiency)
+   - [User-Friendly Interface](#user-friendly-interface)
+   - [Future Features](#future-features)
+4. [Flowcharts](#flowcharts)
+5. [Technologies Used](#technologies-used)
+   - [Data Storage](#data-storage)
+   - [Data Management and Privacy Protection](#data-management-and-privacy-protection)
+   - [Python Libraries Used](#python-libraries-used)
+6. [Testing](#testing)
+   - [PEP8 Validation](#pep8-validation)
+   - [Manual Testing](#manual-testing)
+   - [Peer Review](#peer-review)
+   - [Bugs](#bugs)
+7. [Deployment](#deployment)
+   - [Set Up the Google Sheet](#set-up-the-google-sheet)
+   - [Create Repositories](#create-repositories)
+   - [Install Python Libraries](#install-python-libraries)
+   - [Set up Python Client](#set-up-python-client)
+   - [Deployment to Heroku](#deployment-to-heroku)
+8. [Credits](#credits)
+
 ## Project Rationale
 Console CRM was developed to address the need for an accessible, efficient, and user-friendly customer relationship management system. By integrating essential CRM functions with the power of Python and Google Sheets, Console CRM aims to streamline customer management processes for businesses of all sizes.
 
@@ -511,3 +548,4 @@ This project was developed as part of my coursework at Code Institute, where I h
 - Techniques on how and why to use `@staticmethod` were referenced from [Stack Overflow](https://stackoverflow.com/questions/136097/what-is-the-difference-between-staticmethod-and-classmethod-in-python).
 - Regex for email validation was inspired by the guide provided by [ZeroBounce](https://www.zerobounce.net/python-email-verification/).
 - The tutorial on sending emails in Python was followed from a [YouTube video](https://www.youtube.com/watch?v=ueqZ7RL8zxM).
+- The README inspiration and structure were guided by examples from [GuessWeatherpp3](https://github.com/valejmdev/GuessWeatherpp3) and [Forward Stock Plan](https://github.com/Mykola-CI/forward-stock-plan/).
